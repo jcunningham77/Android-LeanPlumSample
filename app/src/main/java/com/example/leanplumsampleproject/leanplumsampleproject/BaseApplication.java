@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.leanplum.BuildConfig;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.LeanplumPushNotificationCustomizer;
@@ -20,6 +19,7 @@ public class BaseApplication extends Application {
 
     private static final String TAG = "BaseApplication";
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -29,7 +29,7 @@ public class BaseApplication extends Application {
 //        Parser.parseVariables(this);
 //        Parser.parseVariablesForClasses(HomePage.class, ProductDetailFragment.class);
         LeanplumActivityHelper.enableLifecycleCallbacks(this);
-        LeanplumPushService.setGcmSenderId("992075033337");
+        LeanplumPushService.setGcmSenderId(BuildConfig.LP_GSM_SENDER_ID);
         LeanplumPushService.setCustomizer(new LeanplumPushNotificationCustomizer() {
             @Override
             public void customize(android.support.v4.app.NotificationCompat.Builder builder, Bundle bundle) {
@@ -55,9 +55,9 @@ public class BaseApplication extends Application {
             }
         });
         if (BuildConfig.DEBUG) {
-            Leanplum.setAppIdForDevelopmentMode("app_DmxPV9W6ekQ1WAex0vQhz3mmaQaGGnw4HkhdKtKqlAM", "dev_ZsnKbfkKp7HG2NRp1Go1JkiasX1dASlqheLHuVbhkeM");
+            Leanplum.setAppIdForDevelopmentMode(BuildConfig.LP_APP_ID, BuildConfig.LP_DEV_KEY);
         } else {
-            Leanplum.setAppIdForProductionMode("app_DmxPV9W6ekQ1WAex0vQhz3mmaQaGGnw4HkhdKtKqlAM", "prod_D0duBC176r9sLsezGynROXrlAXVwHO5jKRiN0BEwdzU");
+            Leanplum.setAppIdForProductionMode(BuildConfig.LP_APP_ID, BuildConfig.LP_PROD_KEY);
         }
 
         long duration = System.currentTimeMillis() - start;

@@ -16,7 +16,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        buildTypes.each {
+            it.buildConfigField 'String', 'LP_GSM_SENDER_ID', LP_GSM_SENDER_ID
+            it.buildConfigField 'String', 'LP_APP_ID', LP_APP_ID
+            it.buildConfigField 'String', 'LP_DEV_KEY', LP_DEV_KEY
+            it.buildConfigField 'String', 'LP_PROD_KEY', LP_PROD_KEY
+        }
     }
+
+
 }
 
 repositories {
